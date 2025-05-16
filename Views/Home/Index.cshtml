@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "To Do List";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="/wwwroot/js/site.js"/> 
+
+<h2>@ViewData["mydata"]</h2>
+
+<div class="list-holder">
+    @* sample task and add task  *@
+    <div id="task-template" class="section" style="display: none;">
+        <button class="icon">
+            <span class="fa-regular fa-circle" aria-hidden="true"></span>
+        </button>
+        
+        <div class="task-list-item-content">
+            <input type="text" class="task-input"/>
+        </div>
+
+        <div class="task-bttns">
+            <button class="bttn" type="button">Priority</button>
+            <button class="bttn" type="button">Category</button>
+            <button class="bttn" type="button">Hide</button>
+            <button id="del-bttn" class="bttn" type="button">Delete</button>
+        </div>
+    </div>
+
+     <!-- Where Tasks Will Be Added -->
+    <div id="task-container"></div>
+
+
+    @* ADD TASK BUTTON *@
+    <div id="add-task" class="section" onclick="addTask()">
+        <button class="icon">
+            <span class="fa-solid fa-circle-plus" aria-hidden="true"></span>
+        </button>
+        <div class="task-list-item-content">
+            <div class="task-content">Add Task</div>
+        </div>
+    </div>
+</div>
+    
+<div class="side-bar">
+</div>
+
+
+
+
