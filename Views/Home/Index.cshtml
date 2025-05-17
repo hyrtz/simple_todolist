@@ -7,38 +7,42 @@
 
 
 @* SORT AND FILTER *@
+
 <div id="sortFilterButton" class="filter-container" onclick="showFilter()">
-    <p class="sort-filter-title">Sort and Filter by</p>
+    <p class="sort-filter-title">Sort and filter by</p>
 </div>
 
 <!-- Dropdown -->
 <div id="sortFilterPanel" class="filter-dropdown" style="display: none;">
-  <div class="dropdown-panel">
-    <div class="dropdown-title">Filter Tasks</div>
+    <div class="dropdown-panel">
+        <div class="dropdown-title">Filter Tasks</div>
+        
+        <!-- Priority Group -->
+        <div class="filter-group">
+            <div class="group-title">Priority</div>
+            <div class="checkbox-group">
+                <label><input type="checkbox" value="High">High</label>
+                <label><input type="checkbox" value="Medium">Medium</label>
+                <label><input type="checkbox" value="Low">Low</label>
+            </div>
+        </div>
 
-    <!-- Priority Group -->
-    <div class="filter-group">
-      <div class="group-title">Priority</div>
-      <div class="checkbox-group">
-        <label><input type="checkbox" value="High">High</label>
-        <label><input type="checkbox" value="Medium">Medium</label>
-        <label><input type="checkbox" value="Low">Low</label>
-      </div>
+        <!-- Category Group -->
+        <div class="filter-group">
+            <div class="group-title">Category</div>
+            <div class="checkbox-group">
+                <label><input type="checkbox" value="Home">Home</label>
+                <label><input type="checkbox" value="Personal">Personal</label>
+                <label><input type="checkbox" value="Academic">Academic</label>
+                <label><input type="checkbox" value="Work">Work</label>
+            </div>
+        </div>
+
+        <div class="filter-actions">
+            <button class="apply-button" onclick="applyFilters()">Apply</button>
+            <button class="clear-button" onclick="clearFilters()">Clear All</button>
+        </div>
     </div>
-
-    <!-- Category Group -->
-    <div class="filter-group">
-      <div class="group-title">Category</div>
-      <div class="checkbox-group">
-        <label><input type="checkbox" value="Home">Home</label>
-        <label><input type="checkbox" value="Personal">Personal</label>
-        <label><input type="checkbox" value="Academic">Academic</label>
-        <label><input type="checkbox" value="Work">Work</label>
-      </div>
-    </div>
-
-    <button class="apply-button" onclick="applyFilters()"">Apply</button>
-  </div>
 </div>
 
 
@@ -52,12 +56,13 @@
             {
                 <div class="section" data-task-id="@task.Id">
                     <button class="icon" onclick="markAsComplete(@task.Id)">
-                        <input type="checkbox" class="checkbox" />
+                        <input type="checkbox" class="checkBox" />
                     </button>
                     <div class="task-list-item-content">
                         <div class="task-content">@task.TaskName</div>
                     </div>
-                    <div class="task-bttns">
+
+                    <div class="task-bttns" style="display: none;">
                         <button class="bttn" type="button">
                             @(string.IsNullOrEmpty(task.Priority) ? "Priority" : task.Priority)
                         </button>
@@ -82,7 +87,6 @@
 
     <div id="task-template" class="section" style="display: none;">
         <button class="icon">
-            @* <span class="fa-regular fa-circle" aria-hidden="true"></span> *@
             <input type="checkbox" class="checkbox" />
         </button>
         <div class="task-list-item-content">
@@ -299,7 +303,7 @@
             hideTaskDiv.style.color = "#ffffff";
 
             // Reset completedTask to gray
-            completedTaskDiv.style.backgroundColor = "#BDBCBD";
+            completedTaskDiv.style.backgroundColor = "#D0D0CF";
             completedTaskDiv.style.color = "#3E3E3E";
 
             // Load and display hidden tasks
@@ -320,7 +324,7 @@
             completedTaskDiv.style.color = "#ffffff";
 
             // Reset hideTask to gray
-            hideTaskDiv.style.backgroundColor = "#BDBCBD";
+            hideTaskDiv.style.backgroundColor = "#D0D0CF";
             hideTaskDiv.style.color = "#3E3E3E";
 
             // Load and display completed tasks
@@ -333,10 +337,9 @@
         }
 
         function markAsComplete(taskId) {
-            // Create the data object to send
+
             const data = { id: taskId };
 
-            // Get the token
             const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
 
             fetch('@Url.Action("MarkAsComplete")', {
@@ -419,13 +422,170 @@
         }
         
 
-        @* SORT AND FILTER *@
+        @* SORT AND FILTER UI*@
         function showFilter() {
             const filterDropdown = document.querySelector("#sortFilterPanel"); 
             filterDropdown.style.display = filterDropdown.style.display === "block" ? "none" : "block";
         }
-        
-    </script>
 
+
+
+
+        @* SELECT COLLECTED FILTERS *@
+
+        // Function to initialize the filter functionality
+        function initializeFilter() {
+            // Get the apply button element
+            const applyButton = document.querySelector('.apply-button');
+            
+            if (applyButton) {
+                // Add click event listener to the Apply button
+                applyButton.addEventListener('click', function() {
+                    applyFilters();
+                });
+            }
+        }
+
+        // Function to apply filters
+        function applyFilters() {
+
+            // Get all checked priority checkboxes
+            const priorityCheckboxes = document.querySelectorAll('.filter-group:nth-child(1) input[type="checkbox"]:checked');
+            
+            // Get all checked category checkboxes
+            const categoryCheckboxes = document.querySelectorAll('.filter-group:nth-child(2) input[type="checkbox"]:checked');
+            
+            // Create arrays to store selected values
+            const selectedPriorities = [];
+            const selectedCategories = [];
+            
+            // Extract values from priority checkboxes
+            priorityCheckboxes.forEach(checkbox => {
+                selectedPriorities.push(checkbox.value);
+            });
+            
+            // Extract values from category checkboxes
+            categoryCheckboxes.forEach(checkbox => {
+                selectedCategories.push(checkbox.value);
+            });
+        
+            // Create filter data object
+            const filterData = {
+                Priorities: selectedPriorities,
+                Categories: selectedCategories
+            };
+            
+            console.log("Filter data:", filterData);
+            
+            // Get the token for CSRF protection
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            
+            // Send AJAX request to filter tasks
+            fetch('@Url.Action("FilterTasks")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': token
+                },
+                body: JSON.stringify(filterData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.status);
+                }
+                return response.text();
+            })
+        .then(html => {
+            console.log("Received HTML response");
+            
+            // Update the task container with filtered tasks
+            const taskContainer = document.getElementById('task-container');
+            if (taskContainer) {
+                taskContainer.innerHTML = html;
+
+            } else {
+                console.error("Task container element not found");
+            }
+            
+            // Hide the filter panel after applying
+            const filterPanel = document.getElementById('sortFilterPanel');
+            if (filterPanel) {
+                filterPanel.style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Error filtering tasks:', error);
+        });
+    }
+
+        // Add a function to clear all filters
+        function clearFilters() {
+            // Uncheck all checkboxes
+            const checkboxes = document.querySelectorAll('.filter-group input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            // Get Anti-Forgery token
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+            // Load all tasks
+            fetch('@Url.Action("FilterTasks")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': token
+                },
+                body: JSON.stringify({ Priorities: [], Categories: [] })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(html => {
+                // Update the task container with all tasks
+                document.getElementById('task-container').innerHTML = html;
+
+                // Hide the filter panel
+                document.getElementById('sortFilterPanel').style.display = 'none';
+
+                // 🔽 Hide all task buttons
+                const allTaskButtons = document.querySelectorAll('.task-bttns');
+                allTaskButtons.forEach(btnGroup => {
+                    btnGroup.style.display = 'none';
+                });
+
+                // (Optional) Re-attach any event listeners like toggle-on-click
+                initializeTaskClickHandlers(); // if you have a custom function for this
+            })
+            .catch(error => {
+                console.error('Error clearing filters:', error);
+            });
+        }
+
+        // Initialize the filter functionality when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFilter();
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const taskSections = document.querySelectorAll(".section");
+
+            taskSections.forEach(section => {
+                const content = section.querySelector(".task-list-item-content");
+                const buttons = section.querySelector(".task-bttns");
+
+                if (content && buttons) {
+                    content.addEventListener("click", function () {
+                        // Toggle visibility
+                        buttons.style.display = buttons.style.display === "none" ? "flex" : "none";
+                    });
+                }
+            });
+        });
+
+    </script>
     @Html.AntiForgeryToken()
 }

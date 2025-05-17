@@ -15,7 +15,7 @@ h2 {
 
 h2, .list-holder  {
   padding-left: 10rem;
-  position: relative;
+  position: relative;  
 }
 
 .section {
@@ -39,6 +39,7 @@ h2, .list-holder  {
   margin-left: 2.4rem;
   font-family: Poppins;
   margin-bottom: .6rem;
+  z-index: 1 !important;
 }
 
 #add-task {
@@ -152,18 +153,15 @@ body {
   margin-top: 0.5rem;
 }
 
-
-.no-completed-tasks {
+.no-completed-tasks, .no-tasks {
   font-family: Poppins;
 
 }
-
 
 .completedTasksContainer {
   background-color: black;
   margin-right: 1rem;
 }
-
 
 /* HIDE TASK */
 .hidden-task-item {
@@ -257,9 +255,10 @@ body {
     
 }
 
-.checkbox {
+.checkBox {
   border-radius: 100%;
-  border: #2c3fc5 solid 2px;
+  border: #2c3fc5 solid 5px;
+  accent-color: #364BE9;
 }
 
 .sidebar-task-container {
@@ -275,8 +274,10 @@ body {
   float: right;
   font-family: Poppins;
   z-index: 1000;
+  position: relative;
+  margin-top: 2rem;
+  margin-right: -12rem;
 }
-
 
 #sortFilterButton {
   float: right;
@@ -284,15 +285,15 @@ body {
   font-family: Poppins;
   background-color: #F5F5F5;
   border-radius: 6px;
-  width: 10rem;
-  height: 2rem;
+  width: 12rem;
+  height: 3rem;
   border: none;
-  padding: .2rem;
-  margin-top: -1rem;
+  padding: 10px;
+  margin-top: -3rem;
   text-align: center;
-  z-index: 1000;
   transition: ease .3s;
 }
+
 
 #sortFilterButton:hover {
   background-color: #364BE9;
@@ -301,8 +302,12 @@ body {
   transition: ease .3s;
 }
 
+/* .checkbox-group {
+  border: #BDBDBD solid 1px;
+} */
+
 .dropdown-panel {
-  width: 250px;
+  width: 170px;
   padding: 16px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -335,7 +340,7 @@ body {
   height: 16px;
 }
 
-.apply-button {
+.apply-button, .clear-button{
   display: block;
   width: 100%;
   padding: 10px;
@@ -348,9 +353,26 @@ body {
   transition: background-color 0.2s ease;
 }
 
+
 .apply-button:hover {
-  background-color: #1A2891;
+  background-color: #1c2ebe;
+  transition: background-color 0.2s ease;
+  
 }
+
+.clear-button {
+  background-color: #F5F5F5;
+  color: #7B7B7B;
+  margin-top: .5rem;
+  transition: background-color 0.2s ease;
+}
+
+.clear-button:hover {
+  background-color: #BDBCBD;
+  color: #3E3E3E;
+  transition: background-color 0.2s ease;
+}
+
 
 /* Optional scroll styling */
 .checkbox-group::-webkit-scrollbar {

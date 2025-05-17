@@ -13,6 +13,13 @@ public class ApplicationDbContext : DbContext
   public DbSet<CompletedTaskItem> CompletedTaskItems { get; set; }
 
   public DbSet<HiddenTaskItem> HiddenTaskItems { get; set; }
+
+
+  // protected override void OnModelCreating(ModelBuilder modelBuilder)
+  // {
+  //     modelBuilder.Entity<TaskItem>().ToTable("taskitems");
+  // }
+
   
 }
 

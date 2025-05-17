@@ -106,8 +106,8 @@ public class HomeController : Controller
                 Priority = task.Priority,
                 Category = task.Category
             };
-            
-            try 
+
+            try
             {
                 _context.CompletedTaskItems.Add(completedTask);
                 _context.TaskItems.Remove(task);
@@ -119,7 +119,7 @@ public class HomeController : Controller
                 return Json(new { success = false, message = ex.Message });
             }
         }
-        
+
         return Json(new { success = false, message = "Task not found" });
     }
 
@@ -147,8 +147,8 @@ public class HomeController : Controller
                 Priority = task.Priority,
                 Category = task.Category
             };
-            
-            try 
+
+            try
             {
                 _context.HiddenTaskItems.Add(hiddenTask);
                 _context.TaskItems.Remove(task);
@@ -160,7 +160,7 @@ public class HomeController : Controller
                 return Json(new { success = false, message = ex.Message });
             }
         }
-        
+
         return Json(new { success = false, message = "Task not found" });
     }
 
@@ -195,4 +195,44 @@ public class HomeController : Controller
         }
         return RedirectToAction("Index");
     }
+
+
+    // Task Filter
+    [HttpPost]
+    public IActionResult FilterTasks([FromBody] FilterModel filter)
+    {
+        if (filter == null)
+        {
+            return Json(new { success = false, message = "Invalid filter data" });
+        }
+
+        // Start with all tasks
+        var query = _context.TaskItems.AsQueryable();
+
+        // Apply priority filters if any are selected
+        if (filter.Priorities != null && filter.Priorities.Count != 0)
+        {
+            query = query.Where(t => filter.Priorities.Contains(t.Priority));
+        }
+
+        // Apply category filters if any are selected
+        if (filter.Categories != null && filter.Categories.Count != 0)
+        {
+            query = query.Where(t => filter.Categories.Contains(t.Category));
+        }
+
+        // Get the filtered tasks
+        var filteredTasks = query.ToList();
+
+        // Return partial view with filtered tasks
+        return PartialView("_TaskList", filteredTasks);
+    }
+
+    // Add this model class for filtering tasks
+    public class FilterModel
+    {
+        public List<string> Priorities { get; set; } = [];
+        public List<string> Categories { get; set; } = [];
+    }
+
 }
