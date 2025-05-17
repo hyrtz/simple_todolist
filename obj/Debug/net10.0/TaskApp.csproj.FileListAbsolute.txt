@@ -89,7 +89,6 @@
 /Users/e./Desktop/TaskApp/TaskApp/obj/Debug/net10.0/compressed/avwsm0ufnw-zflh5cecxd.gz
 /Users/e./Desktop/TaskApp/TaskApp/obj/Debug/net10.0/compressed/qfpbxdzbj5-zflh5cecxd.gz
 /Users/e./Desktop/TaskApp/TaskApp/obj/Debug/net10.0/compressed/kqsqmonkzn-o0gxarvs00.gz
-/Users/e./Desktop/TaskApp/TaskApp/obj/Debug/net10.0/compressed/xtjtr1en2o-t9oxmnjadc.gz
 /Users/e./Desktop/TaskApp/TaskApp/obj/Debug/net10.0/compressed/vlz48xgb20-35d3alw1oc.gz
 /Users/e./Desktop/TaskApp/TaskApp/bin/Debug/net10.0/Google.Protobuf.dll
 /Users/e./Desktop/TaskApp/TaskApp/bin/Debug/net10.0/Humanizer.dll
@@ -170,3 +169,5 @@
 /Users/e./Desktop/TaskApp/TaskApp/bin/Debug/net10.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
 /Users/e./Desktop/TaskApp/TaskApp/obj/Debug/net10.0/TaskApp.csproj.AssemblyReference.cache
 /Users/e./Desktop/TaskApp/TaskApp/obj/Debug/net10.0/TaskApp.csproj.Up2Date
+/Users/e./Desktop/TaskApp/TaskApp/obj/Debug/net10.0/TaskApp.sourcelink.json
+/Users/e./Desktop/TaskApp/TaskApp/obj/Debug/net10.0/compressed/xtjtr1en2o-unygnkjzk7.gz

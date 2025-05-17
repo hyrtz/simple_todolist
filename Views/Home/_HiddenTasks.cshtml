@@ -1,0 +1,78 @@
+﻿@model List<TaskApp.Models.HiddenTaskItem>
+
+<h2>@ViewData["hiddenTask"]</h2>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var hiddenTask in Model)
+    {
+        <div class="hidden-task-item">
+            <div>@hiddenTask.TaskName</div>
+            <div>Priority: @hiddenTask.Priority</div>
+            <div>Category: @hiddenTask.Category</div>
+            <form asp-action="RestoreHiddenTask" asp-route-id="@hiddenTask.Id" method="post" style="display:inline;">
+                <button class="restore-btn" type="submit">Restore</button>
+                @Html.AntiForgeryToken()
+            </form>
+        </div>
+    }
+}
+else
+{
+    <div class="no-hidden-tasks">No hidden tasks.</div>
+}
+
+@* <div id="hiddenTasksContainer" style="display:none;">
+    <h2 class="hidden-task-h2">Hidden Tasks</h2>
+    <div id="hidden-tasks"></div>
+</div>
+
+
+@section Scripts {
+    <script>
+        function hideTask(taskId) {
+            // Create the data object to send
+            const data = { id: taskId };
+
+            // Get the token
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+            fetch('@Url.Action("HideTask")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': token,
+                    'X-CSRF-TOKEN': token
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Remove the task from the UI
+                    const taskElement = document.querySelector(`.section[data-task-id="${taskId}"]`);
+                    if (taskElement) {
+                        taskElement.remove();
+                    }
+
+                    // Show notification
+                    alert('Task hidden successfully!');
+                } else {
+                    console.error('Error hiding task:', data.message);
+                    alert('Error hiding task. Please check console for details.');
+                }
+            })
+            .catch(error => {
+                console.error('Error hiding task:', error);
+                alert('Error hiding task. Please check console for details.');
+            });
+        }
+    </script>
+
+    @Html.AntiForgeryToken()
+} *@

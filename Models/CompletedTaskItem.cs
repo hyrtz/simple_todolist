@@ -2,8 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TaskApp.Models;
 
-public class TaskItem
+public class CompletedTaskItem
 {
+
   public int Id { get; set; }
 
   [Required]

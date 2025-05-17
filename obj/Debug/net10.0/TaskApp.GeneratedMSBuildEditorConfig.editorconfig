@@ -30,6 +30,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/e./Desktop/TaskApp/TaskApp/Views/Home/_CompletedTasks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9fQ29tcGxldGVkVGFza3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/e./Desktop/TaskApp/TaskApp/Views/Home/_HiddenTasks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9fSGlkZGVuVGFza3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/e./Desktop/TaskApp/TaskApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,0 +1,17 @@
+﻿@model List<TaskApp.Models.CompletedTaskItem>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var completedTask in Model)
+    {
+        <div class="completed-task-item">
+            <div>@completedTask.TaskName</div>
+            <div>Priority: @completedTask.Priority</div>
+            <div>Category: @completedTask.Category</div>
+        </div>
+    }
+}
+else
+{
+    <div class="no-completed-tasks">No completed tasks.</div>
+}

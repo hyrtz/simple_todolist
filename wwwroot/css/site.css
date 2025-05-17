@@ -4,28 +4,28 @@ html {
   font-size: 14px;
 }
 
+/* header */
 h2 {
   font-family: Poppins;
   font-weight: 600;
   font-size: 44px;
-  color: #364BE9;
+  color: #FF9500;
   margin-bottom: 2rem;
 }
 
-
-h2, .list-holder {
+h2, .list-holder  {
   padding-left: 10rem;
   position: relative;
 }
 
 .section {
-    border-bottom: 1px solid #E6E6E6;
-    width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding: 1%;
-
+  border-bottom: 1px solid #E6E6E6;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1%;
 }
+
 
 .icon {
   border: none;
@@ -41,20 +41,19 @@ h2, .list-holder {
   margin-bottom: .6rem;
 }
 
-
 #add-task {
   color: #808080;
   font-weight: 500;
   border: none;
   transition: ease .4s;
+  cursor: pointer;
 }
 
 #add-task:hover {
-  color: #364BE9;
+  color: #FF9500;
   border: none;
   transition: ease .4s;
 }
-
 
 span {
   color: #BDBDBD;
@@ -66,9 +65,8 @@ span {
   font-size: 1.4rem;
 }
 
-
 .fa-solid:hover {
-  color: #364BE9;
+  color: #FF9500;
   border: none;
   transition: ease .4s;
 }
@@ -78,18 +76,48 @@ span {
   font-family: Poppins;
   background-color: #F5F5F5;
   border-radius: 6px;
-  width: 6rem;
+  width: 6.5rem;
   border: none;
   margin: 1%;
   padding: 4px;
-  
 }
 
-.category {
-  display: inline-block;
+.task-bttns {
+  display: flex;
+  margin-left: 2.4rem;
+}
+
+.task-input {
+  width: 100%;
+  font-size: 16px;
+  padding: 4px;
+  outline: none;
+  border: none;
+  font-family: Poppins;
+}
+
+.hide-task-btn:hover {
+  background-color: #364BE9;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#del-bttn:hover {
+  background-color: #FE3A30;
+  color: #ffffff;
 }
 
 
+body {
+  position: relative;
+  min-height: 100%;
+}
+
+#category-select {
+  width: 7.6rem;
+}
+
+/* side bar */
 .side-bar {
   width: 237px; 
   height: 1024px; 
@@ -97,50 +125,263 @@ span {
   top: 0px; 
   position: fixed; 
   background: #E9E9E9; 
-  border-right: 0.80px #BDBDBD solid
+  border-right: 0.80px #BDBDBD solid;
+  display: flexbox;
 }
 
-.task-input {
+.sidebar-task-container {
+  color: #3E3E3E;
+  font-family: Poppins;
+  background-color: #BDBCBD;
+  border-radius: 6px;
+  width: 15rem;
+  height: 3rem;
+  border: none;
+  padding: 8px;
+  margin-top: 8rem;
+  margin-left: 1rem;
+  text-align: center;
+}
+
+.hide-task-title, .completed-task-title {
+  text-align: center;
+  padding: 3px;
+}
+
+#completedTask {
+  margin-top: 0.5rem;
+}
+
+
+.no-completed-tasks {
+  font-family: Poppins;
+
+}
+
+
+.completedTasksContainer {
+  background-color: black;
+  margin-right: 1rem;
+}
+
+
+/* HIDE TASK */
+.hidden-task-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    margin-left: 7rem;
+    border-bottom: 1px solid #E6E6E6;
     width: 100%;
-    font-size: 16px;
-    padding: 4px;
-    outline: none;
-    border: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1%;
+    font-family: Poppins;
 }
 
-#del-bttn {
-  background-color: #FE3A30;
+.hidden-task-h2 {
+    color: #364BE9;
+    margin-bottom: 20px;
+    margin-left: -3rem;
+}
+
+.no-hidden-tasks {
+    color: #6c757d;
+    font-style: italic;
+    padding: 10px;
+    margin-left: 6.5rem;
+    font-family: Poppins;
+}
+
+.restore-btn {
+  color: #364BE9;
+  font-family: Poppins;
+  background-color: #F5F5F5;
+  border-radius: 6px;
+  width: 7rem;
+  border: none;
+  margin-top: 1%;
+  padding: 4px;
+}
+
+.restore-btn:hover {
   color: #ffffff;
+  background-color: #364BE9;
+
+}
+
+/* Ensure sidebar colors are set initially */
+#hideTask {
+    background-color: #BDBCBD;
+    color: #3E3E3E;
+    
+}
+
+
+/* COMPLETED TASKS */
+.completed-task-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  margin-left: 7rem;
+  border-bottom: 1px solid #E6E6E6;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1%;
+  font-family: Poppins;
+  color: #7B7B7B;
+}
+
+.complete-task-h2 {
+    color: #586871;
+    margin-bottom: 20px;
+    margin-left: -3rem;
+}
+
+.no-completed-tasks {
+    font-family: Poppins;
+    color: #6c757d;
+    font-style: italic;
+    padding: 10px;
+}
+
+#completedTasksContainer, #hiddenTasksContainer {
+    margin-top: 30px;
+    padding: 20px;
+    margin-left: 2rem;
+}
+
+
+#completedTask {
+    background-color: #BDBCBD;
+    color: #3E3E3E;
+    
+}
+
+.checkbox {
+  border-radius: 100%;
+  border: #2c3fc5 solid 2px;
+}
+
+.sidebar-task-container {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
 }
 
 
 
-body {
-  position: relative;
-  min-height: 100%;
-} 
-
-
-/* @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* SORT AND FILTER FUNCTION */
+.filter-dropdown {
+  float: right;
+  font-family: Poppins;
+  z-index: 1000;
 }
 
 
-body {
-  margin-bottom: 60px;
+#sortFilterButton {
+  float: right;
+  color: #7B7B7B;
+  font-family: Poppins;
+  background-color: #F5F5F5;
+  border-radius: 6px;
+  width: 10rem;
+  height: 2rem;
+  border: none;
+  padding: .2rem;
+  margin-top: -1rem;
+  text-align: center;
+  z-index: 1000;
+  transition: ease .3s;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+#sortFilterButton:hover {
+  background-color: #364BE9;
+  color: #ffffff;
+  cursor: pointer;
+  transition: ease .3s;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
-} */
+.dropdown-panel {
+  width: 250px;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.dropdown-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.checkbox-group {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+}
+
+.apply-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #364BE9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: medium;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.apply-button:hover {
+  background-color: #1A2891;
+}
+
+/* Optional scroll styling */
+.checkbox-group::-webkit-scrollbar {
+  width: 6px;
+}
+
+.checkbox-group::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+/* Styles for selects */
+select.bttn {
+  cursor: pointer;
+  appearance: none;
+  padding-left: 8px;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  text-align: left;
+}
+
+.task-content {
+  font-family: Poppins;
+  font-size: 14px;
+  padding: 4px 0;
+}
